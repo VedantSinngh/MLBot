@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KNN Classifier</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-gray-200 flex items-center justify-center min-h-screen">
+    <div class="w-full max-w-md p-6 bg-gray-800 rounded-lg shadow-lg">
+        <h1 class="text-2xl font-bold text-center mb-4">KNN Classifier</h1>
+        <form id="knnForm" class="space-y-4">
+            <label class="block">
+                <span class="text-gray-300">Feature 1:</span>
+                <input type="number" name="feature1" class="w-full px-3 py-2 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500">
+            </label>
+            <label class="block">
+                <span class="text-gray-300">Feature 2:</span>
+                <input type="number" name="feature2" class="w-full px-3 py-2 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500">
+            </label>
+            <label class="block">
+                <span class="text-gray-300">Feature 3:</span>
+                <input type="number" name="feature3" class="w-full px-3 py-2 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500">
+            </label>
+            <button type="submit" class="w-full bg-gray-600 hover:bg-gray-500 py-2 rounded-md text-white font-bold">Predict</button>
+        </form>
+        <div id="result" class="mt-4 text-center text-lg font-semibold"></div>
+    </div>
+
+    <script>
+        document.getElementById("knnForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
+            let formData = new FormData(this);
+            let response = await fetch("/predict", {
+                method: "POST",
+                body: formData
+            });
+            let result = await response.json();
+            document.getElementById("result").textContent = `Predicted Class: ${result.class} | Accuracy: ${result.accuracy}%`;
+        });
+    </script>
+</body>
+</html>
