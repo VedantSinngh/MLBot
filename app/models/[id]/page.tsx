@@ -47,8 +47,7 @@ const models = {
             { name: 'Feb', accuracy: 97.2, loss: 0.10 },
             { name: 'Mar', accuracy: 98.5, loss: 0.08 },
         ],
-        readme: `
-# Vision Transformer Model
+        readme: `# Vision Transformer Model
 
 This is a state-of-the-art implementation of the Vision Transformer (ViT) architecture for computer vision tasks.
 
@@ -68,9 +67,8 @@ from vit_model import ViT
 model = ViT.from_pretrained('vit-base')
 predictions = model(images)
 \`\`\`
-    `,
+`,
     },
-    // Add other models here
 };
 
 export default function ModelPage() {
@@ -118,36 +116,6 @@ export default function ModelPage() {
                 </div>
             </div>
 
-            <div className="grid gap-6 md:grid-cols-3 mb-8">
-                <Card>
-                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                        <CardTitle className="text-sm font-medium">Stars</CardTitle>
-                        <Star className="h-4 w-4 text-muted-foreground" />
-                    </CardHeader>
-                    <CardContent>
-                        <div className="text-2xl font-bold">{model.stars}</div>
-                    </CardContent>
-                </Card>
-                <Card>
-                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                        <CardTitle className="text-sm font-medium">Forks</CardTitle>
-                        <GitFork className="h-4 w-4 text-muted-foreground" />
-                    </CardHeader>
-                    <CardContent>
-                        <div className="text-2xl font-bold">{model.forks}</div>
-                    </CardContent>
-                </Card>
-                <Card>
-                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                        <CardTitle className="text-sm font-medium">Accuracy</CardTitle>
-                        <Brain className="h-4 w-4 text-muted-foreground" />
-                    </CardHeader>
-                    <CardContent>
-                        <div className="text-2xl font-bold">{model.accuracy}%</div>
-                    </CardContent>
-                </Card>
-            </div>
-
             <Tabs defaultValue="overview" className="space-y-4">
                 <TabsList>
                     <TabsTrigger value="overview">
@@ -167,66 +135,9 @@ export default function ModelPage() {
                             <CardTitle>Model Information</CardTitle>
                             <CardDescription>Detailed information about the model</CardDescription>
                         </CardHeader>
-                        <CardContent className="space-y-6">
-                            <div className="grid grid-cols-2 gap-4">
-                                <div>
-                                    <h3 className="font-medium">Framework</h3>
-                                    <p className="text-muted-foreground">{model.framework}</p>
-                                </div>
-                                <div>
-                                    <h3 className="font-medium">License</h3>
-                                    <p className="text-muted-foreground">{model.license}</p>
-                                </div>
-                                <div>
-                                    <h3 className="font-medium">Last Updated</h3>
-                                    <p className="text-muted-foreground">
-                                        {new Date(model.updatedAt).toLocaleDateString()}
-                                    </p>
-                                </div>
-                                <div>
-                                    <h3 className="font-medium">Version</h3>
-                                    <p className="text-muted-foreground">{model.version}</p>
-                                </div>
-                            </div>
-
-                            <div>
-                                <h3 className="font-medium mb-2">README</h3>
-                                <div className="prose dark:prose-invert max-w-none">
-                                    <pre className="bg-muted p-4 rounded-lg overflow-auto">
-                                        {model.readme}
-                                    </pre>
-                                </div>
-                            </div>
-                        </CardContent>
-                    </Card>
-                </TabsContent>
-
-                <TabsContent value="code">
-                    <Card>
-                        <CardHeader>
-                            <CardTitle>Implementation</CardTitle>
-                            <CardDescription>Example code and usage instructions</CardDescription>
-                        </CardHeader>
                         <CardContent>
                             <pre className="bg-muted p-4 rounded-lg overflow-auto">
-                                {`import torch
-from vit_model import ViT
-
-# Load the model
-model = ViT.from_pretrained('vit-base')
-
-# Prepare your input
-image = load_image('example.jpg')
-transform = get_transform()
-input_tensor = transform(image).unsqueeze(0)
-
-# Make predictions
-with torch.no_grad():
-    predictions = model(input_tensor)
-
-# Process results
-probabilities = torch.nn.functional.softmax(predictions[0], dim=0)
-predicted_class = torch.argmax(probabilities).item()`}
+                                {model.readme}
                             </pre>
                         </CardContent>
                     </Card>
